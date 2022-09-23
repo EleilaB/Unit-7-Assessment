@@ -16,7 +16,7 @@ let sumZero = (arr) => {
 
 console.log(sumZero(numArr))
 
-// Time Complexity: O(n^2) NOTE: After building out the Unique Characters function, I've realized that I could reduce the time complexity of this function, but I'm gonna leave it how it is
+// Time Complexity: O(n^2)
 
 // UNIQUE CHARACTERS
 
@@ -25,21 +25,64 @@ let uniqueChar = (word) => {
     let stringArr = word.split("")
     console.log(stringArr)
     for(let i = 0; i < stringArr.length - 1; i++){
-        if(stringArr[i] === stringArr[i + 1]){
-            unique = false
+        for(let j = i + 1; j < stringArr.length; j++){
+            if(stringArr[i] === stringArr[j]){
+                unique = false
+            }
         }
     }
     return unique
 }
 
-console.log(uniqueChar("shoe"))
+console.log(uniqueChar("fire"))
 
-// Time Complexity: O(n)
+// Time Complexity: O(n^2)
 
 // PANGRAM SENTENCE
 
 let pangram = (string) => {
-    const alphabet =["A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I", "i", "J", "j", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t", "U", "u", "V", "v", "W", "w", "X", "x", "Y", "y", "Z", "z"]
-    let stringArr = string.split("")
-    // unfinished
+    let letterCount = 0
+    const alphabet =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    let lowerString = string.toLowerCase()
+    let stringArr = lowerString.split("")
+    for(let i = 0; i < alphabet.length; i++){
+        for(let j = 0; j < stringArr.length; j++){
+            if(alphabet[i] === stringArr[j]){
+                letterCount += 1
+                break;
+            }
+        }
+    }
+    console.log(`letter count: ${letterCount}`)
+    if(letterCount === 26){
+        console.log(`String is a pangram!`)
+        return true
+    }
+    else {
+        console.log(`String is not a pangram`)
+        return false
+    }
 }
+
+pangram(`The quick brown fox jumps over the lazy dog.`)
+
+// Time Complexity: O(n)
+
+// LONGEST WORD
+
+let words = [`jupiter`, `cars`, `firetruck`, `this`, `is`, `late`]
+
+let findLongestWord = (wordArr) => {
+    let longestWord = 0
+    for(let i = 0; i < wordArr.length; i++){
+        let currWord = wordArr[i].split("")
+        if(currWord.length > longestWord){
+            longestWord = currWord.length
+        }
+    }
+    return longestWord
+}
+
+console.log(findLongestWord(words))
+
+// Time Complexity: O(n)
